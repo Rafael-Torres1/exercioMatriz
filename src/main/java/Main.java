@@ -1,36 +1,68 @@
 public class Main {
     public static void main(String[] args) {
-        // Declração de matriz A (2x4)
-        int[][] A = {
-                {2, 6, 1, 8},
-                {3, 5, 4, 1}
+        // Declaração de duas matrizes 5x5 pré-definidas
+        int[][] matrizA = {
+                {3, 1, 6},
+                {3, 6, 7},
+                {4, 3, 1}
         };
 
-        // Declaração de matriz N (4x2)
-        int[][] B = {
-                {3, 6},
-                {1, 7},
-                {9, 8},
-                {1, 3}
+        int[][] matrizB = {
+                {1, 5,4},
+                {2, 1, 6},
+                {9, 1, 3}
         };
 
-        // Declração da matriz que armazena linha e coluna de A e B
-        int[][] C = new int[2][2];
+        int linhas = 3;
+        int colunas = 3;
 
-        // Laço de repetição responsável pela multiplicação da linha A pela coluna B
-        for (int i = 0; i < 2; i++ ){
-            for (int j = 0; j < 2; j++){
-                for (int k = 0; k < 4; k++){
-                    // Multiplicação armazenada na variável C
-                    C[i][j] += A[i][k] * B[k][j];
-                }
+        // Matrizes para armazenar os resultados
+        int[][] soma = new int[linhas][colunas];
+        int[][] subtracao = new int[linhas][colunas];
+        double[][] divisao = new double[linhas][colunas];
+
+        // Processamento das três operações em um único loop
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                soma[i][j] = matrizA[i][j] + matrizB[i][j];
+                subtracao[i][j] = matrizA[i][j] - matrizB[i][j];
+                // Cast para double para evitar divisão inteira sem casas decimais
+                divisao[i][j] = (double) matrizA[i][j] / matrizB[i][j];
             }
         }
 
-        // Laço de repetição responsável por mostrar no terminal o resultado da multiplicação
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                System.out.printf("%4d ", C[i][j]);
+        // Exibição dos resultados
+        System.out.println("=== MATRIZ A ===");
+        imprimirMatrizInt(matrizA);
+
+        System.out.println("\n=== MATRIZ B ===");
+        imprimirMatrizInt(matrizB);
+
+        System.out.println("\n=== SOMA (A + B) ===");
+        imprimirMatrizInt(soma);
+
+        System.out.println("\n=== SUBTRAÇÃO (A - B) ===");
+        imprimirMatrizInt(subtracao);
+
+        System.out.println("\n=== DIVISÃO (A / B) ===");
+        imprimirMatrizDouble(divisao);
+    }
+
+    // Método auxiliar para exibir matrizes inteiras formatadas
+    private static void imprimirMatrizInt(int[][] matriz) {
+        for (int[] linha : matriz) {
+            for (int valor : linha) {
+                System.out.printf("%5d ", valor);
+            }
+            System.out.println();
+        }
+    }
+
+    // Método auxiliar para exibir matriz de ponto flutuante formatada com 2 casas decimais
+    private static void imprimirMatrizDouble(double[][] matriz) {
+        for (double[] linha : matriz) {
+            for (double valor : linha) {
+                System.out.printf("%6.2f ", valor);
             }
             System.out.println();
         }
